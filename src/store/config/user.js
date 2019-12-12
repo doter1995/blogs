@@ -5,7 +5,8 @@ export default {
       name: "wdZhang",
       email: ["doter1995@qq.com", "doter1995@163.com"],
       wechat: "doter01",
-      qq: "1182785541"
+      qq: "1182785541",
+      github: "doter1995"
     }
   },
   mutations: {},

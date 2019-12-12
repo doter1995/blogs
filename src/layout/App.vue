@@ -1,5 +1,6 @@
 <template>
   <div class="layout">
+    <Loading v-if="loading" />
     <Menu />
     <Welcome class="wellcome" />
   </div>
@@ -8,12 +9,21 @@
 <script>
 import Menu from "./Menu.vue";
 import Welcome from "./index/Welcome.vue";
-
+import Loading from "../components/Loading.vue";
 export default {
   name: "App",
   components: {
     Menu,
-    Welcome
+    Welcome,
+    Loading
+  },
+  data: () => ({
+    loading: true
+  }),
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 };
 </script>

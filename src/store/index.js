@@ -5,7 +5,9 @@ import config from "./config/index";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    isLoading: false
+  },
   mutations: {},
   actions: {},
   modules: {
