@@ -7,15 +7,50 @@
         <i class="iconfont iconusercenter1" />
       </span>
     </div>
+    <ul class="group-list">
+      <li
+        v-for="(group, group_index) in Object.keys(list)"
+        :key="group_index"
+        :class="['item', { active: active === group }]"
+      >
+        <span @click="selectGroup(group)">{{ group }}</span>
+      </li>
+    </ul>
+    <div class="tool-bar">
+      <span class="setting">
+        <i class="iconfont iconset" />
+      </span>
+      <span class="user-name">wdZhang</span>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import IconText from "../components/IconText.vue";
 
 export default {
   components: {
     IconText
+  },
+  data: () => ({
+    active: ""
+  }),
+  computed: {
+    ...mapGetters("github", ["markdowns"]),
+    list() {
+      // return this.markdowns.length > 0 ? this.markdowns[0] : {};
+      return { a: { b: 1 }, b: "2" };
+    }
+  },
+  methods: {
+    showMarkdwon(key) {
+      return this.active === key && Object.keys(this.list[key]).length > 0;
+    },
+    selectGroup(key) {
+      console.log("selectGroup", key);
+      this.active = key;
+    }
   }
 };
 </script>
@@ -33,6 +68,9 @@ export default {
   background-color: #131313;
   transition-duration: 0.2s;
   transition-property: width;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   &:hover {
     width: 250px;
   }
@@ -59,6 +97,38 @@ export default {
           background-color: #fffa;
         }
       }
+    }
+  }
+  .group-list {
+    min-width: 250px;
+    flex: 1;
+    & > .item {
+      line-height: 30px;
+      height: 30px;
+      padding: 0 10px;
+      &:hover {
+        background-color: #777;
+        cursor: pointer;
+      }
+      &.active {
+        background-color: #666;
+      }
+    }
+  }
+  .tool-bar {
+    width: 250px;
+    display: flex;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    .setting {
+      margin: 14px;
+      cursor: pointer;
+    }
+    .user-name {
+      cursor: pointer;
     }
   }
 }

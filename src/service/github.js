@@ -1,5 +1,4 @@
 import * as githubApi from "../api/github.js";
-//https://api.github.com/repos/doter1995/blogs-mark-down/git/trees/master?recursive=4
 
 export function getAllRepositoryByUserName(userName) {
   return githubApi.getAllRepositoryByUserName(userName).then(res => {
@@ -9,7 +8,6 @@ export function getAllRepositoryByUserName(userName) {
 export function getRepository(owner, name) {
   return githubApi.getRepository(owner, name).then(res => {
     const result = getTree(res.tree);
-    console.log("result", result);
     return result;
   });
 }
@@ -30,3 +28,17 @@ const getTree = data => {
   });
   return result;
 };
+
+export function getMarkdownsFromGithubByUser(userName) {
+  return getAllRepositoryByUserName(userName).then(reposName => {
+    const repositories = reposName.filter(name =>
+      name.toLocaleLowerCase().includes("mark-down")
+    );
+    let queryList = repositories.map(repository =>
+      getRepository("doter1995", repository)
+    );
+    return Promise.all(queryList).then(res => {
+      return res;
+    });
+  });
+}
