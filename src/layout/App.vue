@@ -3,11 +3,15 @@
     <Loading v-if="loading" />
     <Menu />
     <Welcome class="wellcome" />
+    <UserInfo v-if="isShowUserInfo" />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 import Menu from "./Menu.vue";
+import UserInfo from "./UserInfo.vue";
 import Welcome from "./index/Welcome.vue";
 import Loading from "../components/Loading.vue";
 export default {
@@ -15,11 +19,17 @@ export default {
   components: {
     Menu,
     Welcome,
-    Loading
+    Loading,
+    UserInfo
   },
   data: () => ({
     loading: true
   }),
+  computed: {
+    ...mapState("config/userInfo", {
+      isShowUserInfo: state => state.show
+    })
+  },
   mounted() {
     setTimeout(() => {
       this.loading = false;

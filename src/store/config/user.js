@@ -7,8 +7,21 @@ export default {
       wechat: "doter01",
       qq: "1182785541",
       github: "doter1995"
+    },
+    show: false
+  },
+  mutations: {
+    showInfo(state, isShow) {
+      state.show = isShow ? true : false;
     }
   },
-  mutations: {},
-  actions: {}
+  actions: {
+    showUserInfo({ commit, state }, isShow) {
+      if (typeof isShow === "boolean") {
+        commit("showInfo", isShow);
+      } else {
+        commit("showInfo", !state.show);
+      }
+    }
+  }
 };

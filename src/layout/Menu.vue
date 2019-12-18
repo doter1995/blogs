@@ -3,7 +3,7 @@
     <div class="user">
       <IconText class="user-icon" title="D" />
       <span class="user-name">wdZhang</span>
-      <span class="user-link">
+      <span class="user-link" @click="showUserInfo">
         <i class="iconfont iconusercenter1" />
       </span>
     </div>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import IconText from "../components/IconText.vue";
 
 export default {
@@ -44,6 +44,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions("config/userInfo", ["showUserInfo"]),
     showMarkdwon(key) {
       return this.active === key && Object.keys(this.list[key]).length > 0;
     },
@@ -128,6 +129,7 @@ export default {
       cursor: pointer;
     }
     .user-name {
+      flex: 1;
       cursor: pointer;
     }
   }
