@@ -1,18 +1,16 @@
 <template>
   <div class="user-info">
-    <IconText class="user-icon" title="D" />
-    <span @click="showUserInfo(false)">关闭</span>
+    <div class="top-bar">
+      <span class="iconfont iconclose" @click="showUserInfo(false)"></span>
+    </div>
+    <div class="content">test</div>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-import IconText from "../components/IconText.vue";
 
 export default {
-  components: {
-    IconText
-  },
   methods: {
     ...mapActions("config/userInfo", ["showUserInfo"])
   }
@@ -34,5 +32,16 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  .top-bar {
+    margin: 8px;
+    display: flex;
+    justify-content: flex-end;
+    .iconclose {
+      cursor: pointer;
+    }
+  }
+  .content {
+    flex: 1;
+  }
 }
 </style>

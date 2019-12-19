@@ -127,6 +127,11 @@ export default {
     .setting {
       margin: 14px;
       cursor: pointer;
+      i.iconset {
+        width: 32px;
+        height: 32px;
+        font-size: 32px;
+      }
     }
     .user-name {
       flex: 1;
