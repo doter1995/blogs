@@ -1,4 +1,5 @@
 import * as githubApi from "../api/github.js";
+import { generateCodeFrame } from "vue-template-compiler";
 
 export function getAllRepositoryByUserName(userName) {
   return githubApi.getAllRepositoryByUserName(userName).then(res => {
@@ -13,7 +14,13 @@ export function getRepository(owner, name) {
 }
 
 const getTree = data => {
-  const result = {};
+  const result = [];
+  data
+    .filter(v => v.type === "tree")
+    .forEach(item => {
+      const pathArr = item.path.split("/");
+      pathArr;
+    });
   data.forEach(item => {
     if (item.type === "blob" && item.path.endsWith(".md")) {
       const pathArr = item.path.split("/");
@@ -27,6 +34,13 @@ const getTree = data => {
     }
   });
   return result;
+};
+const getNode = (dataSet, path) => {
+  const pathArr = path.split("/");
+  const curData = dataSet;
+  pathArr.forEach(item => {
+    if(curData)
+  });
 };
 
 export function getMarkdownsFromGithubByUser(userName) {
