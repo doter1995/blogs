@@ -19,6 +19,11 @@ const repositoryListData = [
 ];
 const repositoryData = [
   {
+    path: "test",
+    type: "tree",
+    url: "https://a.com"
+  },
+  {
     path: "test/blob0.md",
     mode: "100644",
     type: "blob"
@@ -29,10 +34,21 @@ const repositoryData = [
     type: "blob"
   },
   {
+    path: "test/case",
+    mode: "100644",
+    type: "tree"
+  },
+  {
     mode: "040000",
-    path: "testCaseTree",
+    path: "test/case/Tree",
     sha: "d8733f770e89d16e42c7b12d6a18994aa74047d7",
     type: "tree"
+  },
+  {
+    mode: "040000",
+    path: "test/case/tree",
+    sha: "d8733f770e89d16e42c7b12d6a18994aa74047d7",
+    type: "blob"
   }
 ];
 

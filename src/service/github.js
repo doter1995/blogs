@@ -1,50 +1,43 @@
 import * as githubApi from "../api/github.js";
-import { generateCodeFrame } from "vue-template-compiler";
 
 export function getAllRepositoryByUserName(userName) {
   return githubApi.getAllRepositoryByUserName(userName).then(res => {
+    debugger;
     return res.map(value => value.name);
   });
 }
 export function getRepository(owner, name) {
   return githubApi.getRepository(owner, name).then(res => {
-    const result = getTree(res.tree);
-    return result;
+    const resultTree = new Tree();
+    res.tree.sort(v => v.name).forEach(resultTree.setNodeTree);
+    return resultTree.getArray();
   });
 }
-
-const getTree = data => {
-  const result = [];
-  data
-    .filter(v => v.type === "tree")
-    .forEach(item => {
-      const pathArr = item.path.split("/");
-      pathArr;
+class Tree {
+  result = {};
+  setNode = item => {
+    const pathArr = item.path.split("/");
+    const name = pathArr.pop();
+    let pathNode = this.result;
+    pathArr.forEach(key => {
+      if (!pathNode[key]) {
+        pathNode[key] = { children: {} };
+      }
+      pathNode = pathNode[key].children;
     });
-  data.forEach(item => {
-    if (item.type === "blob" && item.path.endsWith(".md")) {
-      const pathArr = item.path.split("/");
-      let pathNode = result;
-      pathArr.forEach(key => {
-        if (!pathNode[key]) {
-          pathNode[key] = {};
-        }
-        pathNode = pathNode[key];
-      });
-    }
-  });
-  return result;
-};
-const getNode = (dataSet, path) => {
-  const pathArr = path.split("/");
-  const curData = dataSet;
-  pathArr.forEach(item => {
-    if(curData)
-  });
-};
+    pathNode[name] = {
+      name,
+      ...item
+    };
+  };
+  getArray = () => {
+    return this.result;
+  };
+}
 
 export function getMarkdownsFromGithubByUser(userName) {
   return getAllRepositoryByUserName(userName).then(reposName => {
+    debugger;
     const repositories = reposName.filter(name =>
       name.toLocaleLowerCase().includes("mark-down")
     );
