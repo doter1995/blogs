@@ -9,7 +9,7 @@ export function getAllRepositoryByUserName(userName) {
 export function getRepository(owner, name) {
   return githubApi.getRepository(owner, name).then(res => {
     const resultTree = new Tree();
-    res.tree.sort(v => v.name).forEach(resultTree.setNodeTree);
+    res.tree.forEach(v => resultTree.setNode(v));
     return resultTree.getArray();
   });
 }
@@ -21,7 +21,10 @@ class Tree {
     let pathNode = this.result;
     pathArr.forEach(key => {
       if (!pathNode[key]) {
-        pathNode[key] = { children: {} };
+        pathNode[key] = {};
+      }
+      if (!pathNode[key].children) {
+        pathNode[key].children = {};
       }
       pathNode = pathNode[key].children;
     });
@@ -31,7 +34,17 @@ class Tree {
     };
   };
   getArray = () => {
-    return this.result;
+    const getNode = item => {
+      if (!item) return {};
+      const children = item.children;
+      if (children && Object.keys(children).length > 0) {
+        item.children = Object.values(children).map(v => getNode(v));
+      } else {
+        delete item.children;
+      }
+      return item;
+    };
+    return Object.values(this.result).map(v => getNode(v));
   };
 }
 

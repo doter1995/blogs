@@ -56,8 +56,9 @@ describe("getAllRepositoryByUserName", () => {
   githubApi.getAllRepositoryByUserName.mockReturnValue(
     Promise.resolve(repositoryListData)
   );
-  test("get return values name array", () => {
-    expect(getAllRepositoryByUserName("doter1995")).resolves.toEqual([
+  test("get return values name array", async () => {
+    const result = await getAllRepositoryByUserName("doter1995");
+    expect(result).toEqual([
       "test1",
       "test2-markdown",
       "markdown-test3",
@@ -70,34 +71,34 @@ describe("getRepository", () => {
   githubApi.getRepository.mockReturnValue(
     Promise.resolve({ tree: repositoryData })
   );
-  test("get Repository format array", () => {
+  test("get Repository format array", async () => {
     const expected = [
       {
         name: "test",
+        type: "tree",
+        url: "https://a.com",
         children: [
           {
+            name: "blob0.md",
+            type: "blob",
+            mode: "100644"
+          },
+          {
             type: "tree",
+            mode: "100644",
+            name: "case",
             children: [
               {
-                name: "blob0.md",
+                name: "blob1.md",
+                mode: "100644",
                 type: "blob"
-              },
-              {
-                name: "case",
-                children: [
-                  {
-                    name: "blob1.md",
-                    type: "blob"
-                  }
-                ]
               }
             ]
           }
         ]
       }
     ];
-    expect(getRepository("doter1995")).resolves.toEqual(
-      expect.arrayContaining(expected)
-    );
+    const result = await getRepository("doter1995");
+    expect(result).toEqual(expect.arrayContaining(expected));
   });
 });
