@@ -13,9 +13,27 @@ export function getRepository(owner, name) {
     return resultTree.getArray();
   });
 }
+
+export function getMarkdownsFromGithubByUser(userName) {
+  return getAllRepositoryByUserName(userName).then(repositoryNameList => {
+    const repositories = repositoryNameList.filter(name =>
+      name.toLocaleLowerCase().includes("mark-down")
+    );
+    let queryList = repositories.map(repository =>
+      getRepository("doter1995", repository)
+    );
+    return Promise.all(queryList).then(res => {
+      return res;
+    });
+  });
+}
+
 class Tree {
   result = {};
   setNode = item => {
+    if (item.type === "blob" && !item.path.endsWith(".md")) {
+      return;
+    }
     const pathArr = item.path.split("/");
     const name = pathArr.pop();
     let pathNode = this.result;
@@ -40,25 +58,12 @@ class Tree {
       if (children && Object.keys(children).length > 0) {
         item.children = Object.values(children).map(v => getNode(v));
       } else {
-        delete item.children;
+        if (item.type === "blob" && item.name.endsWith(".md")) {
+          delete item.children;
+        }
       }
       return item;
     };
     return Object.values(this.result).map(v => getNode(v));
   };
-}
-
-export function getMarkdownsFromGithubByUser(userName) {
-  return getAllRepositoryByUserName(userName).then(reposName => {
-    debugger;
-    const repositories = reposName.filter(name =>
-      name.toLocaleLowerCase().includes("mark-down")
-    );
-    let queryList = repositories.map(repository =>
-      getRepository("doter1995", repository)
-    );
-    return Promise.all(queryList).then(res => {
-      return res;
-    });
-  });
 }
