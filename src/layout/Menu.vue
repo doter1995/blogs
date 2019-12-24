@@ -7,15 +7,7 @@
         <i class="iconfont iconusercenter1" />
       </span>
     </div>
-    <ul class="group-list">
-      <li
-        v-for="(group, group_index) in Object.keys(list)"
-        :key="group_index"
-        :class="['item', { active: active === group }]"
-      >
-        <span @click="selectGroup(group)">{{ group }}</span>
-      </li>
-    </ul>
+    <List class="item-list" :dataSet="markdowns" />
     <div class="tool-bar">
       <span class="setting">
         <i class="iconfont iconset" />
@@ -28,20 +20,18 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import IconText from "../components/IconText.vue";
+import List from "../components/List.vue";
 
 export default {
   components: {
-    IconText
+    IconText,
+    List
   },
   data: () => ({
     active: ""
   }),
   computed: {
-    ...mapGetters("github", ["markdowns"]),
-    list() {
-      // return this.markdowns.length > 0 ? this.markdowns[0] : {};
-      return { a: { b: 1 }, b: "2" };
-    }
+    ...mapGetters("github", ["markdowns"])
   },
   methods: {
     ...mapActions("config/userInfo", ["showUserInfo"]),
@@ -100,9 +90,10 @@ export default {
       }
     }
   }
-  .group-list {
+  .item-list {
     min-width: 250px;
     flex: 1;
+    overflow-y: auto;
     & > .item {
       line-height: 30px;
       height: 30px;

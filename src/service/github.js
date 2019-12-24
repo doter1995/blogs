@@ -2,7 +2,6 @@ import * as githubApi from "../api/github.js";
 
 export function getAllRepositoryByUserName(userName) {
   return githubApi.getAllRepositoryByUserName(userName).then(res => {
-    debugger;
     return res.map(value => value.name);
   });
 }
@@ -20,10 +19,15 @@ export function getMarkdownsFromGithubByUser(userName) {
       name.toLocaleLowerCase().includes("mark-down")
     );
     let queryList = repositories.map(repository =>
-      getRepository("doter1995", repository)
+      githubApi.getRepository("doter1995", repository)
     );
     return Promise.all(queryList).then(res => {
-      return res;
+      const list = res.reduce((acc, cur) => {
+        return acc.concat(cur.tree);
+      }, []);
+      const resultTree = new Tree();
+      list.forEach(v => resultTree.setNode(v));
+      return resultTree.getArray();
     });
   });
 }
