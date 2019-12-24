@@ -2,7 +2,7 @@
   <div class="layout">
     <Loading v-if="loading" />
     <Menu />
-    <Welcome class="wellcome" />
+    <MarkDown class="wellcome" />
     <UserInfo v-if="isShowUserInfo" />
   </div>
 </template>
@@ -12,15 +12,15 @@ import { mapState } from "vuex";
 
 import Menu from "./Menu.vue";
 import UserInfo from "./UserInfo.vue";
-import Welcome from "./index/Welcome.vue";
+import MarkDown from "./mark-down/index.vue";
 import Loading from "../components/Loading.vue";
 export default {
   name: "App",
   components: {
     Menu,
-    Welcome,
     Loading,
-    UserInfo
+    UserInfo,
+    MarkDown
   },
   data: () => ({
     loading: true
