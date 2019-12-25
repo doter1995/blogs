@@ -2,7 +2,7 @@
   <ul class="list">
     <li v-for="(item, index) in dataSet" :key="index">
       <span
-        @click="select = index"
+        @click="onSelect(item, index)"
         class="item"
         :class="{ active: index === select }"
         >{{ item.name.replace(".md", "") }}</span
@@ -22,7 +22,13 @@ export default {
   },
   data: () => ({
     select: -1
-  })
+  }),
+  methods: {
+    onSelect: function(item, index) {
+      this.select = index;
+      this.$emit("selectItem", item, index);
+    }
+  }
 };
 </script>
 

@@ -2,7 +2,7 @@
   <div class="layout">
     <Loading v-if="loading" />
     <Menu />
-    <MarkDown class="wellcome" />
+    <Content class="content" />
     <UserInfo v-if="isShowUserInfo" />
   </div>
 </template>
@@ -10,9 +10,9 @@
 <script>
 import { mapState } from "vuex";
 
-import Menu from "./Menu.vue";
+import Menu from "./Menu/index.vue";
 import UserInfo from "./UserInfo.vue";
-import MarkDown from "./mark-down/index.vue";
+import Content from "./Content.vue";
 import Loading from "../components/Loading.vue";
 export default {
   name: "App",
@@ -20,7 +20,7 @@ export default {
     Menu,
     Loading,
     UserInfo,
-    MarkDown
+    Content
   },
   data: () => ({
     loading: true
@@ -47,7 +47,7 @@ export default {
   font-size: 14px;
   color: #fff;
   background-color: #313131;
-  .wellcome {
+  .content {
     padding: 0 60px;
   }
 }

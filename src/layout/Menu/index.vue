@@ -7,7 +7,7 @@
         <i class="iconfont iconusercenter1" />
       </span>
     </div>
-    <List class="item-list" :dataSet="markdowns" />
+    <List class="item-list" :dataSet="markdowns" @select-item="selectItem" />
     <div class="tool-bar">
       <span class="setting">
         <i class="iconfont iconset" />
@@ -19,8 +19,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import IconText from "../components/IconText.vue";
-import List from "../components/List.vue";
+import IconText from "../../components/IconText.vue";
+import List from "./List.vue";
 
 export default {
   components: {
@@ -35,12 +35,15 @@ export default {
   },
   methods: {
     ...mapActions("config/userInfo", ["showUserInfo"]),
+    ...mapActions("router", ["changeRouter"]),
     showMarkdwon(key) {
       return this.active === key && Object.keys(this.list[key]).length > 0;
     },
-    selectGroup(key) {
-      console.log("selectGroup", key);
-      this.active = key;
+    selectItem(item) {
+      debugger;
+      if (item.type === "blob") {
+        this.changeRouter("markdown", item.url);
+      }
     }
   }
 };
