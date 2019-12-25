@@ -61,6 +61,9 @@ export default {
   flex-direction: column;
   &:hover {
     width: 250px;
+    .item-list {
+      visibility: visible;
+    }
   }
   .user {
     position: relative;
@@ -88,6 +91,7 @@ export default {
     }
   }
   .item-list {
+    visibility: hidden;
     min-width: 250px;
     flex: 1;
     overflow-y: auto;

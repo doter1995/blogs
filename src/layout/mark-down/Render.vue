@@ -155,7 +155,7 @@ export default {
   }
 
   :not(pre) code {
-    color: #c7254e;
+    color: #deed2a;
     background-color: #f2f2f2;
   }
 
@@ -222,6 +222,8 @@ export default {
 
   img {
     max-width: 100%;
+    display: block;
+    margin: 10px;
   }
 
   .image-package {
