@@ -7,7 +7,7 @@
         <i class="iconfont iconusercenter1" />
       </span>
     </div>
-    <List class="item-list" :dataSet="markdowns" @select-item="selectItem" />
+    <List class="item-list" :dataSet="markdowns" />
     <div class="tool-bar">
       <span class="setting">
         <i class="iconfont iconset" />
@@ -38,12 +38,6 @@ export default {
     ...mapActions("router", ["changeRouter"]),
     showMarkdwon(key) {
       return this.active === key && Object.keys(this.list[key]).length > 0;
-    },
-    selectItem(item) {
-      debugger;
-      if (item.type === "blob") {
-        this.changeRouter("markdown", item.url);
-      }
     }
   }
 };

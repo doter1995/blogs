@@ -2,7 +2,7 @@
   <ul class="list">
     <li v-for="(item, index) in dataSet" :key="index">
       <span
-        @click="onSelect(item, index)"
+        @click="onSelectItem(item, index)"
         class="item"
         :class="{ active: index === select }"
         >{{ item.name.replace(".md", "") }}</span
@@ -12,6 +12,7 @@
   </ul>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "List",
   props: {
@@ -24,9 +25,12 @@ export default {
     select: -1
   }),
   methods: {
-    onSelect: function(item, index) {
+    ...mapActions("router", ["changeRouter"]),
+    onSelectItem(item, index) {
       this.select = index;
-      this.$emit("selectItem", item, index);
+      if (item.type === "blob") {
+        this.changeRouter({ type: "markdown", value: item.url });
+      }
     }
   }
 };
