@@ -155,7 +155,7 @@ export default {
   }
 
   :not(pre) code {
-    color: #c7254e;
+    color: #deed2a;
     background-color: #f2f2f2;
   }
 
