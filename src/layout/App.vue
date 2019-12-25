@@ -48,7 +48,9 @@ export default {
   color: #fff;
   background-color: #313131;
   .content {
-    padding: 0 60px;
+    padding-left: 60px;
+    overflow-y: auto;
+    height: 100vh;
   }
 }
 </style>

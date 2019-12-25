@@ -1,5 +1,8 @@
 import * as githubApi from "../api/github.js";
 
+export function getBlob(url) {
+  return githubApi.getBlob(url);
+}
 export function getAllRepositoryByUserName(userName) {
   return githubApi.getAllRepositoryByUserName(userName).then(res => {
     return res.map(value => value.name);
