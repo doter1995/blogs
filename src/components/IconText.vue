@@ -1,5 +1,7 @@
 <template>
-  <span class="icon-text">{{ title.substring(0, 1) }}</span>
+  <span class="icon-text" @click="$emit('click')">{{
+    title.substring(0, 1)
+  }}</span>
 </template>
 <script lang="ts">
 export default {

@@ -1,13 +1,22 @@
 <template>
-  <div class="menu">
+  <div
+    class="menu"
+    @mouseover="showList(true)"
+    @mouseout="showList(false)"
+    :class="{ expanded: isShowList }"
+  >
     <div class="user">
-      <IconText class="user-icon" title="D" />
+      <IconText class="user-icon" title="D" @click="showList" />
       <span class="user-name">wdZhang</span>
       <span class="user-link" @click="showUserInfo">
         <i class="iconfont iconusercenter1" />
       </span>
     </div>
-    <List class="item-list" :dataSet="markdowns" />
+    <List
+      class="item-list"
+      :class="{ expanded: isShowList }"
+      :dataSet="markdowns"
+    />
     <div class="tool-bar">
       <span class="setting">
         <i class="iconfont iconset" />
@@ -28,7 +37,8 @@ export default {
     List
   },
   data: () => ({
-    active: ""
+    active: "",
+    isShowList: false
   }),
   computed: {
     ...mapGetters("github", ["markdowns"])
@@ -38,6 +48,9 @@ export default {
     ...mapActions("router", ["changeRouter"]),
     showMarkdwon(key) {
       return this.active === key && Object.keys(this.list[key]).length > 0;
+    },
+    showList(flag) {
+      this.isShowList = flag !== undefined ? flag : !this.isShowList;
     }
   }
 };
@@ -59,11 +72,8 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  &:hover {
+  &.expanded {
     width: 250px;
-    .item-list {
-      visibility: visible;
-    }
   }
   .user {
     position: relative;
@@ -91,6 +101,9 @@ export default {
     }
   }
   .item-list {
+    &.expanded {
+      visibility: visible;
+    }
     visibility: hidden;
     min-width: 250px;
     flex: 1;
