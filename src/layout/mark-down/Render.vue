@@ -164,8 +164,7 @@ export default {
     word-wrap: normal;
     word-break: break-all;
     white-space: pre;
-    overflow-x: scroll;
-    overscroll-behavior-x: contain;
+    overflow-x: auto;
     margin-top: 0;
     margin-bottom: 20px;
     border-radius: 4px;
