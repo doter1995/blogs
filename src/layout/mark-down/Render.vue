@@ -222,7 +222,7 @@ export default {
   img {
     max-width: 100%;
     display: block;
-    margin: 10px;
+    margin: 10px auto;
   }
 
   .image-package {
