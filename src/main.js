@@ -10,3 +10,15 @@ new Vue({
 }).$mount("#app");
 
 store.dispatch("github/getMarkdownsFromGithub", "doter1995");
+window.addEventListener("resize", () => {
+  setDocHeight();
+});
+window.addEventListener("orientationchange", function() {
+  setDocHeight();
+});
+function setDocHeight() {
+  const innerHeight = window.innerHeight;
+  document.documentElement.style.setProperty("--vh", `${innerHeight / 100}px`);
+}
+
+setDocHeight();

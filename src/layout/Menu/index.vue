@@ -46,9 +46,6 @@ export default {
   methods: {
     ...mapActions("config/userInfo", ["showUserInfo"]),
     ...mapActions("router", ["changeRouter"]),
-    showMarkdwon(key) {
-      return this.active === key && Object.keys(this.list[key]).length > 0;
-    },
     showList(flag) {
       this.isShowList = flag !== undefined ? flag : !this.isShowList;
     }

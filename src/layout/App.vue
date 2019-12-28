@@ -39,10 +39,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../components/style/variable.scss";
+
 @import url("../assets/clearStyle.css");
 @import url("../assets/iconfont/index.css");
+
 .layout {
   height: 100vh;
+  height: vh(100);
   width: 100vw;
   font-size: 14px;
   color: #fff;
@@ -51,6 +55,7 @@ export default {
     padding-left: 60px;
     overflow-y: auto;
     height: 100vh;
+    height: vh(100);
   }
 }
 </style>

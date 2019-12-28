@@ -40,5 +40,8 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 1.4rem;
+  @media screen and (max-width: 900px) {
+    margin: 0 10%;
+  }
 }
 </style>

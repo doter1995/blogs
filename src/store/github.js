@@ -3,7 +3,7 @@ import { getMarkdownsFromGithubByUser } from "../service/github.js";
 export default {
   namespaced: true,
   state: {
-    markDown: {}
+    markDown: []
   },
   mutations: {
     setMarkdowns(state, markDown) {
