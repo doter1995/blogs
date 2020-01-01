@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../components/style/variable.scss";
 
 @import url("../assets/clearStyle.css");
@@ -56,6 +56,7 @@ export default {
     overflow-y: auto;
     height: 100vh;
     height: vh(100);
+    background-color: initial;
   }
 }
 </style>

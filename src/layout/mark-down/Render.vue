@@ -13,20 +13,39 @@ export default {
     data: {
       type: String,
       default: ""
+    },
+    url: {
+      type: String,
+      default: ""
     }
   },
   mounted() {
     marked.setOptions({
       highlight: code => highlight.highlightAuto(code).value
     });
-    this.text = marked(this.data);
+    this.renderer();
   },
   data: () => ({
     text: ""
   }),
   watch: {
-    data(value) {
-      this.text = marked(value);
+    data() {
+      this.text = this.renderer();
+    }
+  },
+  methods: {
+    renderer() {
+      const renderer = new marked.Renderer();
+      renderer.image = (href, title, text) => {
+        let url = href;
+        const baseUrl =
+          "https://github.com/doter1995/blogs-mark-down/raw/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E9%98%85%E8%AF%BB";
+        if (href.startsWith("./")) {
+          url = href.replace(".", baseUrl);
+        }
+        return `<img src="${url}" title="title">${text}</img>`;
+      };
+      this.text = marked(this.data, { renderer });
     }
   }
 };

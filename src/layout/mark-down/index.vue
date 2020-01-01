@@ -1,5 +1,5 @@
 <template>
-  <render :data="templateData" />
+  <render :data="templateData" :url="url" />
 </template>
 <script>
 import { mapState } from "vuex";

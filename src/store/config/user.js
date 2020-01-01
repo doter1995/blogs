@@ -3,10 +3,13 @@ export default {
   state: {
     info: {
       name: "wdZhang",
-      email: ["doter1995@qq.com", "doter1995@163.com"],
+      email: "doter1995@qq.com",
       wechat: "doter01",
       qq: "1182785541",
-      github: "doter1995"
+      github: "doter1995",
+      company: "ThoughtWorks",
+      skills: "web前端,JS,TS,React,Vue,D3.js,Three.js,JAVA,Docker,Python",
+      city: "西安"
     },
     show: false
   },
