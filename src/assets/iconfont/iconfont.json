@@ -20,6 +20,13 @@
       "unicode_decimal": 58972
     },
     {
+      "icon_id": "6289892",
+      "name": "qq",
+      "font_class": "qq",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
       "icon_id": "11474203",
       "name": "auto",
       "font_class": "auto",

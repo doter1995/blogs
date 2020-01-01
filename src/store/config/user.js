@@ -5,6 +5,7 @@ export default {
       name: "wdZhang",
       email: "doter1995@qq.com",
       wechat: "doter01",
+      jianshu: "5721922d1d60",
       qq: "1182785541",
       github: "doter1995",
       company: "ThoughtWorks",
