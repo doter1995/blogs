@@ -33,7 +33,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.loading = false;
-    }, 10000);
+    }, 10);
   }
 };
 </script>
@@ -57,6 +57,7 @@ export default {
     height: 100vh;
     height: vh(100);
     background-color: initial;
+    display: flex;
   }
 }
 </style>

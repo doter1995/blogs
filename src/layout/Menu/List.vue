@@ -29,7 +29,14 @@ export default {
     onSelectItem(item, index) {
       this.select = index;
       if (item.type === "blob") {
-        this.changeRouter({ type: "markdown", value: item.url });
+        if (item.name.endsWith(".md")) {
+          this.changeRouter({ type: "md", value: item.url });
+        }
+        if (item.name.endsWith(".html")) {
+          this.changeRouter({ type: "html", value: item.url });
+        }
+      } else {
+        this.changeRouter({ type: "welcome", value: item.url });
       }
     }
   }

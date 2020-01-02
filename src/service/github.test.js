@@ -1,7 +1,7 @@
 jest.mock("../api/github.js");
 import * as githubApi from "../api/github.js";
 
-import { getRepository, getAllRepositoryByUserName } from "./github";
+import { getRepository, getRepositoryByUserNameAndHtmlOrMD } from "./github";
 
 const repositoryListData = [
   {
@@ -11,10 +11,13 @@ const repositoryListData = [
     name: "test2-markdown"
   },
   {
-    name: "markdown-test3"
+    name: "mark-down-test3"
   },
   {
-    name: "aa-markdown-test4"
+    name: "aa-blog-html"
+  },
+  {
+    name: "aa-mark-down-blog-html"
   }
 ];
 const repositoryData = [
@@ -30,6 +33,11 @@ const repositoryData = [
   },
   {
     path: "test/case/blob1.md",
+    mode: "100644",
+    type: "blob"
+  },
+  {
+    path: "test/case/blob1.html",
     mode: "100644",
     type: "blob"
   },
@@ -52,17 +60,16 @@ const repositoryData = [
   }
 ];
 
-describe("getAllRepositoryByUserName", () => {
+describe("getRepositoryByUserNameAndHtmlOrMD", () => {
   githubApi.getAllRepositoryByUserName.mockReturnValue(
     Promise.resolve(repositoryListData)
   );
   test("get return values name array", async () => {
-    const result = await getAllRepositoryByUserName("doter1995");
+    const result = await getRepositoryByUserNameAndHtmlOrMD("doter1995");
     expect(result).toEqual([
-      "test1",
-      "test2-markdown",
-      "markdown-test3",
-      "aa-markdown-test4"
+      "mark-down-test3",
+      "aa-blog-html",
+      "aa-mark-down-blog-html"
     ]);
   });
 });

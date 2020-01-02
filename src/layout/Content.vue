@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="content">
     <Welcome v-if="isShow('welcome')" />
-    <MarkDown v-if="isShow('markdown')" />
+    <MarkDown v-if="isShow('md')" />
+    <iframe class="iframe" v-if="isShow('html')" :src="value" />
   </div>
 </template>
 <script>
@@ -16,9 +17,7 @@ export default {
     MarkDown
   },
   computed: {
-    ...mapState("router", {
-      type: state => state.type
-    })
+    ...mapState("router", ["type", "value"])
   },
   methods: {
     isShow: function(type) {
@@ -27,4 +26,12 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.content {
+  display: flex;
+  .iframe {
+    flex: 1;
+    border: none;
+  }
+}
+</style>

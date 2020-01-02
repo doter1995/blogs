@@ -12,10 +12,15 @@
         <i class="iconfont iconusercenter1" />
       </span>
     </div>
+    <ul class="tabs">
+      <li class="tab" v-for="tab in types" :key="tab" @click="setType(tab)">
+        {{ tab }}
+      </li>
+    </ul>
     <List
       class="item-list"
       :class="{ expanded: isShowList }"
-      :dataSet="markdowns"
+      :dataSet="menuList"
     />
     <div class="tool-bar">
       <span class="setting">
@@ -27,7 +32,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 import IconText from "../../components/IconText.vue";
 import List from "./List.vue";
 
@@ -38,13 +43,17 @@ export default {
   },
   data: () => ({
     active: "",
-    isShowList: false
+    isShowList: true
   }),
   computed: {
-    ...mapGetters("github", ["markdowns"])
+    ...mapState("github", ["markdown", "types", "selectedType", "html"]),
+    menuList() {
+      return this.selectedType == "md" ? this.markdown : this.html;
+    }
   },
   methods: {
     ...mapActions("config/userInfo", ["showUserInfo"]),
+    ...mapActions("github", ["setType"]),
     ...mapActions("router", ["changeRouter"]),
     showList(flag) {
       this.isShowList = flag !== undefined ? flag : !this.isShowList;
@@ -85,6 +94,7 @@ export default {
       flex: 1;
     }
     .user-link {
+      font-size: 24px;
       margin: 14px;
       .iconusercenter1 {
         border-radius: 6px;
@@ -94,6 +104,20 @@ export default {
           color: #fff;
           background-color: #fffa;
         }
+      }
+    }
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+    padding: 4px 0;
+    background-color: #336;
+    .tab {
+      flex: 1;
+      text-align: center;
+      &:not(:first-child) {
+        border-left: 1px #fff solid;
       }
     }
   }

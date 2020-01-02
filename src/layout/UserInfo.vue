@@ -12,7 +12,11 @@
           class="iconfont iconwechat"
           href="weixin://contacts/profile/XK17703404293"
         />
-        <i class="iconfont iconjianshu" />
+        <a
+          class="iconfont iconjianshu"
+          target="_blank"
+          :href="'https://www.jianshu.com/u/' + info.jianshu"
+        />
       </div>
       <div class="discription">
         <div class="company">
